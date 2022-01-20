@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  coveralls: coveralls/coveralls@1.0.6
 jobs:
   build:
     docker:
@@ -8,6 +6,20 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install and Make
-          command: npm install && make test-coverage
-      - coveralls/upload
+          name: Install ganache cli
+          command: docker pull trufflesuite/ganache-cli
+      - run:
+          name: Setup ganache
+          command: docker run -d -p 8545:8545 trufflesuite/ganache-cli:latest -h 0.0.0.0
+      - run:
+          name: Install truffle
+          command: npm install -g truffle
+      - run:
+          name: Install coveralls
+          command: npm install -g coveralls
+      - run:
+          name: Install node module
+          command: npm install
+      - run:
+          name: run coveralls
+          command: npm run coverage && cat coverage/lcov.info | coveralls
