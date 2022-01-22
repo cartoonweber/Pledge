@@ -26,6 +26,10 @@ jobs:
           command: |
             truffle compile
       - run:
+          name: Generate coverage
+          command: |
+            truffle run coverage
+      - run:
           name: Run tests
           command: |
             npm run test:ci
