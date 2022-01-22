@@ -35,7 +35,9 @@
     "truffle": "5.2.6",
     "web3": "1.2.8",
     "web3-eth-abi": "^1.3.4",
-    "web3-utils": "^1.3.4"
+    "web3-utils": "^1.3.4",
+    "mocha": "5.2.0",
+    "nyc": "^14.1.1"
   },
   "scripts": {
     "clean": "rimraf ./build",
@@ -46,7 +48,7 @@
     "deploy-ethmainnet": "npx truffle migrate --reset --network ethmainnet",
     "deploy-ganache": "npx truffle migrate --reset --network development",
     "coverage": "./node_modules/.bin/solidity-coverage",
-    "test:ci": "SILENT=true node --max-old-space-size=4096 ./node_modules/.bin/nyc --reporter=lcov --exclude '**/sc_temp/**' --exclude '**/test/**/' -- mocha test/units/* --timeout 100000 --no-warnings --exit",
+    "test:ci": "SILENT=true node --max-old-space-size=4096 ./node_modules/.bin/nyc --reporter=lcov --exclude '**/sc_temp/**' --exclude '**/test/**/' -- mocha test/test.js --timeout 100000 --no-warnings --exit",
     "test:debug": "node --max-old-space-size=4096 ./node_modules/.bin/mocha test/units/* --timeout 100000 --no-warnings --exit"
   }
 }
