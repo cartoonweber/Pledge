@@ -45,6 +45,8 @@
     "deploy-ropsten": "npx truffle migrate --reset --network ropsten",
     "deploy-ethmainnet": "npx truffle migrate --reset --network ethmainnet",
     "deploy-ganache": "npx truffle migrate --reset --network development",
-    "coverage": "./node_modules/.bin/solidity-coverage"
+    "coverage": "./node_modules/.bin/solidity-coverage",
+    "test:ci": "SILENT=true node --max-old-space-size=4096 ./node_modules/.bin/nyc --reporter=lcov --exclude '**/sc_temp/**' --exclude '**/test/**/' -- mocha test/units/* --timeout 100000 --no-warnings --exit",
+    "test:debug": "node --max-old-space-size=4096 ./node_modules/.bin/mocha test/units/* --timeout 100000 --no-warnings --exit"
   }
 }
