@@ -22,6 +22,10 @@ jobs:
           command: |
             yarn
       - run:
+          name: Truffle compile
+          command: |
+            truffle compile
+      - run:
           name: Run tests
           command: |
             npm run test:ci
