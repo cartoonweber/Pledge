@@ -36,6 +36,21 @@ describe("Pledge", function () {
     );
   });
 
+  it("lockPeriod", async function(){
+    const lockPerod = new BN("360");// 1 hour lock time
+
+    const { logs } = await this.pledgeContract.grantAuthorized(user1, {from: owner});
+    expectEvent.inLogs(logs, "EventGrantAuthorized", {
+      auth_: user1,
+    });
+
+    await this.pledgeContract.setLockingPeriod(lockPerod, {from: user1,});
+
+    expect(await this.pledgeContract.lockingPeriod()).to.be.bignumber.equal(
+      lockPerod
+    );
+  });
+
   it("pledge", async function () {
     const amount = "100";
     await this.tokenContract.approve(
